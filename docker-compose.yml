@@ -13,9 +13,10 @@ services:
       - SPRING_DATASOURCE_PASSWORD=12345
 
   stats-db:
+    container_name: stats-db
     image: postgres:16.1
     ports:
-      - "5433:5432"
+      - "5435:5432"
     environment:
       - POSTGRES_DB=explore-with-me
       - POSTGRES_USER=dbuser
