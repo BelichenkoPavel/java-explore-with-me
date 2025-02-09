@@ -7,6 +7,10 @@ services:
       - stats-db
     ports:
       - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/explore-with-me
+      - SPRING_DATASOURCE_USERNAME=dbuser
+      - SPRING_DATASOURCE_PASSWORD=12345
 
   stats-db:
     image: postgres:16.1
