@@ -41,6 +41,6 @@ public class MainClient extends BaseClient {
             );
         }
 
-        return get(path, 1l, parameters);
+        return get(path, 1L, parameters);
     }
 }
