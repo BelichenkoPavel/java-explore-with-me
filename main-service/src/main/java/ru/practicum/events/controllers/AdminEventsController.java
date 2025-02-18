@@ -30,7 +30,7 @@ public class AdminEventsController {
             @RequestParam(name = "from", defaultValue = "0") Integer from,
             @RequestParam(name = "size", defaultValue = "10") Integer size
     ) {
-        List<EventDto> list = eventService.getEventsFull("", categories, false, rangeStart, rangeEnd, false, "", from, size, users, states);
+        List<EventDto> list = eventService.getEventsFull("", categories, null, rangeStart, rangeEnd, null, "", from, size, users, states);
 
         return EventMapper.mapClientList(list);
     }

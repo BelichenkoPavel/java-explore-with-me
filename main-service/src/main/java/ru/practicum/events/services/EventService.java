@@ -280,8 +280,8 @@ public class EventService {
             builder.and(QEventModel.eventModel.category.id.in(categories));
         }
 
-        if (onlyAvailable) {
-            builder.and(QEventModel.eventModel.confirmedRequests.loe(QEventModel.eventModel.participantLimit));
+        if (onlyAvailable != null && onlyAvailable) {
+            builder.and(QEventModel.eventModel.confirmedRequests.eq(QEventModel.eventModel.participantLimit));
         }
 
         if (paid != null) {
