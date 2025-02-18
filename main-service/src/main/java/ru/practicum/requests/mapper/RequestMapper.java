@@ -10,6 +10,7 @@ import ru.practicum.events.models.EventModel;
 import ru.practicum.user.models.UserModel;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class RequestMapper {
@@ -18,6 +19,10 @@ public class RequestMapper {
         UserModel userModel = UserMapper.map(userDto);
 
         String status = "PENDING";
+
+        if (event.getParticipantLimit() == 0) {
+            status = "CONFIRMED";
+        }
 
         if (!event.isRequestModeration()) {
             status = "CONFIRMED";
@@ -34,7 +39,7 @@ public class RequestMapper {
     public static RequestDto map(RequestModel request) {
         return RequestDto.builder()
                 .id(request.getId())
-                .created(request.getCreated().toString())
+                .created(request.getCreated().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .status(request.getStatus())
                 .requester(request.getRequester().getId())
                 .event(request.getEvent().getId())
