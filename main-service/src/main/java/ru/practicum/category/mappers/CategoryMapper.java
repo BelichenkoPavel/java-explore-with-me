@@ -1,5 +1,6 @@
 package ru.practicum.category.mappers;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.dto.CreateCategoryDto;
 import ru.practicum.category.dto.UpdateCategoryDto;
@@ -7,6 +8,7 @@ import ru.practicum.category.models.CategoryModel;
 
 import java.util.List;
 
+@UtilityClass
 public class CategoryMapper {
     public static CategoryModel mapCreate(CreateCategoryDto categoryDto) {
         return CategoryModel

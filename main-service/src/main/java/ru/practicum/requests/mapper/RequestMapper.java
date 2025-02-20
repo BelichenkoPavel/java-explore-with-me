@@ -1,5 +1,6 @@
 package ru.practicum.requests.mapper;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.requests.dto.RequestDto;
 import ru.practicum.requests.models.RequestModel;
 import ru.practicum.events.dto.EventDto;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@UtilityClass
 public class RequestMapper {
     public static RequestModel createMap(EventDto event, UserDto userDto) {
         EventModel eventModel = EventMapper.map(event);

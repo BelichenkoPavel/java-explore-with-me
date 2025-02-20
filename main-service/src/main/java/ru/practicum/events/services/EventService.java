@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.CreateHitDto;
 import ru.practicum.MainClient;
 import ru.practicum.StatDto;
@@ -47,6 +48,7 @@ public class EventService {
     @Value("${stat.url}")
     private String statEndpoint;
 
+    @Transactional
     public EventDto createEvent(Long userId, CreateEventDto eventDto) {
         LocalDateTime eventDate = LocalDateTime.parse(eventDto.getEventDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
@@ -65,6 +67,7 @@ public class EventService {
         return EventMapper.map(eventModel);
     }
 
+    @Transactional
     public EventDto updateEventForUser(Long userId, Long eventId, UpdateEventDto eventDto) {
         UserDto initiator = userService.getById(userId);
         UserModel initiatorModel = UserMapper.map(initiator);
@@ -84,6 +87,7 @@ public class EventService {
         return updateEvent(eventModel, eventDto);
     }
 
+    @Transactional
     public EventDto updateEventForAdmin(Long eventId, UpdateEventDto eventDto) {
         Optional<EventModel> existEventModelOp = eventRepository.findById(eventId);
 
@@ -94,6 +98,7 @@ public class EventService {
         return updateEvent(existEventModelOp.get(), eventDto);
     }
 
+    @Transactional
     public EventDto updateEvent(EventModel existEventModel, UpdateEventDto eventDto) {
         if (eventDto.getParticipantLimit() < 0) {
             throw new BadRequestException("participant limit must be positive");
@@ -173,6 +178,7 @@ public class EventService {
         return EventMapper.map(eventModel);
     }
 
+    @Transactional
     public void setConfirmedRequests(EventDto eventDto) {
         EventModel eventModel = EventMapper.map(eventDto);
 
@@ -330,6 +336,7 @@ public class EventService {
         return EventMapper.mapList(list);
     }
 
+    @Transactional
     private void updateViews(List<EventModel> models) {
         MainClient client = new MainClient(this.statEndpoint, new RestTemplateBuilder());
 

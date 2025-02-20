@@ -2,6 +2,7 @@ package ru.practicum.requests.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.exceptions.ConflictException;
 import ru.practicum.exceptions.NotFoundException;
 import ru.practicum.requests.dto.RequestDto;
@@ -26,6 +27,7 @@ public class RequestService {
     private final UserService userService;
     private final EventService eventService;
 
+    @Transactional
     public RequestDto addRequest(Long userId, Long eventId) {
         UserDto userDto = userService.getById(userId);
         EventDto eventDto;
@@ -81,6 +83,7 @@ public class RequestService {
         return RequestMapper.mapList(requestModels);
     }
 
+    @Transactional
     public UpdateUserRequestsResultDto updateUserRequests(Long userId, Long eventId, UpdateUserRequestsDto requests) {
         userService.getById(userId);
         EventDto eventDto = eventService.getUserEvent(userId, eventId);
@@ -118,6 +121,7 @@ public class RequestService {
         return new UpdateUserRequestsResultDto(confirmedRequests, rejectedRequests);
     }
 
+    @Transactional
     public RequestDto cancelRequest(Long userId, Long requestId) {
         userService.getById(userId);
 

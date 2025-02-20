@@ -2,6 +2,7 @@ package ru.practicum.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.CreateHitDto;
 import ru.practicum.StatDto;
 import ru.practicum.exceptions.BadRequestException;
@@ -39,6 +40,7 @@ public class StatService {
         return StatMapper.mapList(hits);
     }
 
+    @Transactional
     public void createHit(CreateHitDto dto) {
         Hit hit = HitMapper.mapCreate(dto);
 
