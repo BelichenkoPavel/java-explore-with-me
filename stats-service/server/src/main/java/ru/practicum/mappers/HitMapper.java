@@ -1,11 +1,13 @@
 package ru.practicum.mappers;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.CreateHitDto;
 import ru.practicum.models.Hit;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@UtilityClass
 public class HitMapper {
     public static Hit mapCreate(CreateHitDto dto) {
         LocalDateTime timestamp = LocalDateTime.parse(dto.getTimestamp(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

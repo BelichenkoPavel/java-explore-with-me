@@ -2,6 +2,7 @@ package ru.practicum.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.CreateHitDto;
@@ -19,14 +20,15 @@ public class StatController {
     private final StatService statService;
 
     @PostMapping("/hit")
+    @ResponseStatus(HttpStatus.CREATED)
     public void createHit(@Valid @RequestBody CreateHitDto dto) {
         statService.createHit(dto);
     }
 
     @GetMapping("/stats")
     public List<StatDto> getStats(
-            @RequestParam(name = "start", required = false) String start,
-            @RequestParam(name = "end", required = false) String end,
+            @RequestParam(name = "start") String start,
+            @RequestParam(name = "end") String end,
             @RequestParam(name = "uris", required = false) String[] uris,
             @RequestParam(name = "unique", required = false) boolean unique
     ) {
