@@ -40,7 +40,7 @@ public class CommentsService {
 
         CommentModel model = CommentMapper.createMap(commentDto, userDto, eventDto);
         CommentModel saveModel = commentRepository.save(model);
-        
+
         return CommentMapper.map(saveModel);
     }
 
